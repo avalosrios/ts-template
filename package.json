@@ -1,0 +1,60 @@
+{
+  "name": "zenrez-ts-template",
+  "version": "1.0.0",
+  "description": "Zenrez Typescript template",
+  "main": "dist/server.js",
+  "engines": {
+    "node": "10.16.0",
+    "npm": "6.9.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "tslint -c tslint.json -p tsconfig.json",
+    "test": "jest",
+    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
+    "watch-node": "nodemon dist/server.js",
+    "watch-test": "npm run test -- --watchAll",
+    "watch-ts": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zenrez/zenrez-ts-template.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zenrez/zenrez-ts-template/issues"
+  },
+  "homepage": "https://github.com/Zenrez/zenrez-ts-template#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.0",
+    "@types/jest": "^24.0.15",
+    "@types/node": "^12.0.12",
+    "@types/supertest": "^2.0.8",
+    "concurrently": "^4.1.1",
+    "jest": "^24.8.0",
+    "nodemon": "^1.19.1",
+    "supertest": "^4.0.2",
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.2"
+  },
+  "dependencies": {
+    "@types/body-parser": "^1.17.0",
+    "@types/compression": "0.0.36",
+    "@types/dotenv": "^6.1.1",
+    "@types/lusca": "^1.6.0",
+    "@types/morgan": "^1.7.35",
+    "@types/passport": "^1.0.0",
+    "@zenrez/logger": "^1.2.0",
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.1.1",
+    "lusca": "^1.6.1",
+    "morgan": "^1.9.1",
+    "passport": "^0.4.0",
+    "pm2": "^3.5.1"
+  }
+}

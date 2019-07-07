@@ -1,0 +1,142 @@
+defaults: &defaults
+  working_directory: /home/circleci/zenrez-ts-template
+  docker:
+    - image: circleci/node:10.16.0
+  environment:
+    CI: true
+
+server-defaults: &server-defaults
+  <<: *defaults
+  docker:
+    - image: circleci/node:10.16.0
+#    - image: circleci/mongo:4.0.2-xenial
+
+version: 2
+jobs:
+  setup:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: set npm token
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory
+          root: /home/circleci
+          # Must be relative path from root
+          paths:
+            - zenrez-ts-template
+
+  build-server:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: /home/circleci
+      - restore_cache:
+          keys:
+            - dependency-cache-v1-{{ .Branch }}-{{ checksum "package.json" }}-{{ .Environment.CIRCLE_SHA1 }}
+            - dependency-cache-v1-{{ .Branch }}-{{ checksum "package.json" }}
+      - run:
+          name: npm install
+          command: npm install
+      - save_cache:
+          key: dependency-cache-v1-{{ .Branch }}-{{ checksum "package.json" }}-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ./node_modules
+      - run:
+          name: lint
+          command: npm run lint
+
+  test-server:
+    <<: *server-defaults
+    steps:
+      - attach_workspace:
+          at: /home/circleci
+      - restore_cache:
+          key: dependency-cache-v1-{{ .Branch }}-{{ checksum "package.json" }}-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          command: npm run coverage-server
+
+#  test-models:
+#    <<: *server-defaults
+#    steps:
+#      - attach_workspace:
+#          at: /home/circleci
+#      - restore_cache:
+#          key: dependency-cache-v1-{{ .Branch }}-{{ checksum "package.json" }}-{{ .Environment.CIRCLE_SHA1 }}
+#      - run:
+#          command: npm run coverage-models
+
+#  test-helpers:
+#    <<: *server-defaults
+#    steps:
+#      - attach_workspace:
+#          at: /home/circleci
+#      - restore_cache:
+#          key: dependency-cache-v1-{{ .Branch }}-{{ checksum "package.json" }}-{{ .Environment.CIRCLE_SHA1 }}
+#      - run:
+#          command: npm run coverage-helpers
+
+  deploy-staging:
+    <<: *defaults
+    environment:
+      - HEROKU_APP: zenrez-ts-template
+    steps:
+      - attach_workspace:
+          at: /home/circleci
+      - add_ssh_keys:
+          fingerprints:
+            - "b8:6b:7a:dc:43:eb:c9:92:51:37:f4:03:b7:48:ab:0f"
+#      - deploy:
+#          name: Deploy
+#          command: |
+#            bash .circleci/setup_heroku.sh && git push heroku-staging master
+
+  deploy-prod:
+    <<: *defaults
+    environment:
+      - HEROKU_APP: zenrez-ts-template
+    steps:
+      - attach_workspace:
+          at: /home/circleci
+      - add_ssh_keys:
+          fingerprints:
+            - "b8:6b:7a:dc:43:eb:c9:92:51:37:f4:03:b7:48:ab:0f"
+#      - deploy:
+#          name: Deploy
+#          command: |
+#            bash .circleci/setup_heroku.sh && git push heroku-prod master
+
+workflows:
+  version: 2
+  build_test_deploy:
+    jobs:
+      - setup
+      - build-server:
+          requires:
+            - setup
+#      - test-models:
+#          requires:
+#            - build-server
+      - test-server:
+          requires:
+            - build-server
+#      - test-helpers:
+#          requires:
+#            - build-server
+      - deploy-staging:
+          requires:
+#            - test-models
+            - test-server
+#            - test-helpers
+          filters:
+            branches:
+              only: master
+      - deploy-prod:
+          requires:
+#            - test-models
+            - test-server
+#            - test-helpers
+          filters:
+            branches:
+              only: master
