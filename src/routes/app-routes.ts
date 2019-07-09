@@ -1,4 +1,5 @@
 import { Request, Response, Router } from 'express';
+import { v1Routes } from '../v1/routes/v1-routes';
 
 class AppRoutes {
     public router: Router = Router();
@@ -12,6 +13,7 @@ class AppRoutes {
         this.router.get('/', (req: Request, res: Response ) => {
             res.status(200).send({ message: 'It Works! '});
         });
+        this.router.use('/v1', v1Routes);
     }
 
 }
