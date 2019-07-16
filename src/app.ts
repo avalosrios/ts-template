@@ -1,5 +1,6 @@
 import bodyParser from 'body-parser';
 import compression from 'compression';
+import errorHandler from 'errorhandler';
 import express from 'express';
 import lusca from 'lusca';
 import morgan from 'morgan';
@@ -25,6 +26,8 @@ class App {
         // Set the express config
         if (isProdEnv) {
             this.app.use(enforceHttps({ trustProtoHeader: true }));
+        } else {
+            this.app.use(errorHandler());
         }
         this.app.use(morgan('tiny'));
 

@@ -1,14 +1,13 @@
+import logger from '@zenrez/logger';
 import app from './app';
 
 const server = app.listen(app.get('port'), () => {
-    // tslint:disable-next-line:no-console
-    console.log(
+    logger.info(
         '  App is running at http://localhost:%d in %s mode',
         app.get('port'),
         app.get('env'),
     );
-    // tslint:disable-next-line:no-console
-    console.log('  Press CTRL-C to stop\n');
+    logger.info('  Press CTRL-C to stop\n');
 });
 
 export default server;
