@@ -1,6 +1,8 @@
 # Zenrez Typescript Template
 
 Use this project as a base for typescript services
+ 
+# NOTE: Change codecov token
 
 ## Pre-reqs
 To build and run this app locally you will need a few things:
