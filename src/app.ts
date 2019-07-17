@@ -1,3 +1,4 @@
+import logger from '@zenrez/logger';
 import bodyParser from 'body-parser';
 import compression from 'compression';
 import errorHandler from 'errorhandler';
@@ -21,6 +22,17 @@ class App {
         this.app.set('port', process.env.SERVER_PORT || this.DEFAULT_SERVER_PORT);
         this.config();
     }
+
+    public startServer = async (): Promise<void> => {
+        this.app.listen(this.app.get('port'), () => {
+            logger.info(
+                '  App is running at http://localhost:%d in %s mode',
+                this.app.get('port'),
+                this.app.get('env'),
+            );
+            logger.info('  Press CTRL-C to stop\n');
+        });
+    };
 
     private config(): void {
         // Set the express config
@@ -54,4 +66,4 @@ class App {
     }
 }
 
-export default new App().app;
+export default new App();

@@ -1,8 +1,8 @@
 import request from 'supertest';
-import app from '../../src/app';
+import application from '../../src/app';
 describe( 'GET /random-url', () => {
     it('return 404', () => {
-        request(app).get('/random-url')
+        request(application.app).get('/random-url')
             .expect(404);
     });
 });
