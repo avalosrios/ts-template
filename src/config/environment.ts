@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import fs from 'fs';
 
 const load = () => {
     let path;
@@ -11,10 +12,16 @@ const load = () => {
             break;
         case 'staging':
         case 'production':
-            path = `${__dirname}/../../.env`;
             break;
         default:
-            path = `${__dirname}/../../.env.example`;
+            if (fs.existsSync(`${__dirname}/../../.env`)) {
+                // tslint:disable-next-line:no-console
+                console.log('Using .env file to supply config environment variables');
+                path = `${__dirname}/../../.env`;
+            } else {
+                path = `${__dirname}/../../.env.example`;
+            }
+            break;
     }
     return dotenv.config({ path });
 };
