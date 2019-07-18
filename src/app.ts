@@ -19,7 +19,7 @@ class App {
     constructor() {
         this.app = express();
         this.environment = environment.load();
-        this.app.set('port', process.env.SERVER_PORT || this.DEFAULT_SERVER_PORT);
+        this.app.set('port', process.env.PORT || this.DEFAULT_SERVER_PORT);
         this.config();
     }
 
