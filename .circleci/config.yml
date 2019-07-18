@@ -4,6 +4,7 @@ defaults: &defaults
     - image: circleci/node:10.16.0
   environment:
     CI: true
+    CODECOV_TOKEN: fcacfafa-7493-4bec-9f34-5bd026be2bac
 
 server-defaults: &server-defaults
   <<: *defaults
@@ -11,7 +12,10 @@ server-defaults: &server-defaults
     - image: circleci/node:10.16.0
 #    - image: circleci/mongo:4.0.2-xenial
 
-version: 2
+version: 2.1
+orbs:
+  codecov: codecov/codecov@1.0.1
+
 jobs:
   setup:
     <<: *defaults
@@ -56,6 +60,9 @@ jobs:
           key: dependency-cache-v1-{{ .Branch }}-{{ checksum "package.json" }}-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           command: npm run coverage-server
+      - codecov/upload:
+          file: coverage/*.info
+          flags: unittests
 
 #  test-models:
 #    <<: *server-defaults
@@ -108,7 +115,7 @@ jobs:
 #            bash .circleci/setup_heroku.sh && git push heroku-prod master
 
 workflows:
-  version: 2
+  version: 2.1
   build_test_deploy:
     jobs:
       - setup
