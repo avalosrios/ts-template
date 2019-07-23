@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "coverage-server": "npm run test && codecov",
+    "coverage-server": "npm run test",
     "lint": "tslint -c tslint.json -p tsconfig.json",
     "heroku-postbuild": "npm run build",
     "start": "pm2-runtime start ecosystem.config.js --env production",
@@ -36,7 +36,6 @@
     "@types/jest": "^24.0.15",
     "@types/node": "^12.0.12",
     "@types/supertest": "^2.0.8",
-    "codecov": "3.5.0",
     "concurrently": "4.1.1",
     "jest": "24.8.0",
     "nodemon": "1.19.1",
