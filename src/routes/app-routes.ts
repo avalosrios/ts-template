@@ -1,4 +1,5 @@
 import { Request, Response, Router } from 'express';
+import { basicAuth } from '../middleware/auth';
 import { v1Routes } from '../v1/routes/v1-routes';
 
 class AppRoutes {
@@ -13,7 +14,7 @@ class AppRoutes {
         this.router.get('/', (req: Request, res: Response ) => {
             res.status(200).send({ message: 'It Works! '});
         });
-        this.router.use('/v1', v1Routes);
+        this.router.use('/v1', basicAuth, v1Routes);
     }
 
 }
