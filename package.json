@@ -1,7 +1,7 @@
 {
-  "name": "zenrez-ts-template",
+  "name": "ts-template",
   "version": "1.0.0",
-  "description": "Zenrez Typescript template",
+  "description": "Typescript template",
   "main": "dist/server.js",
   "engines": {
     "node": "12.16.2",
@@ -22,14 +22,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Zenrez/zenrez-ts-template.git"
+    "url": "git+https://github.com/avalosrios/ts-template"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Zenrez/zenrez-ts-template/issues"
+    "url": "https://github.com/avalosrios/ts-template/issues"
   },
-  "homepage": "https://github.com/Zenrez/zenrez-ts-template#readme",
+  "homepage": "https://github.com/avalosrios/ts-template#readme",
   "devDependencies": {
     "@types/errorhandler": "0.0.32",
     "@types/express": "4.17.6",

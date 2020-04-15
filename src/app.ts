@@ -1,4 +1,3 @@
-import logger from '@zenrez/logger';
 import bodyParser from 'body-parser';
 import compression from 'compression';
 import errorHandler from 'errorhandler';
