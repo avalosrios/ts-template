@@ -1,4 +1,4 @@
-# Zenrez Typescript Template
+# WebApp Typescript Template
 
 Use this project as a base for typescript services
  
