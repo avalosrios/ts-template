@@ -24,13 +24,13 @@ class App {
 
     public startServer = async (): Promise<void> => {
         this.app.listen(this.app.get('port'), () => {
-            // tslint:disable-next-line:no-console
+            // eslint-disable-next-line no-console
             console.info(
                 '  App is running at http://localhost:%d in %s mode',
                 this.app.get('port'),
                 this.app.get('env'),
             );
-            // tslint:disable-next-line:no-console
+            // eslint-disable-next-line no-console
             console.info('  Press CTRL-C to stop\n');
         });
     };

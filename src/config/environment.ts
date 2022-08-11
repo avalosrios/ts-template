@@ -15,7 +15,7 @@ const load = () => {
             break;
         default:
             if (fs.existsSync(`${__dirname}/../../.env`)) {
-                // tslint:disable-next-line:no-console
+                // eslint-disable-next-line no-console
                 console.log('Using .env file to supply config environment variables');
                 path = `${__dirname}/../../.env`;
             } else {
