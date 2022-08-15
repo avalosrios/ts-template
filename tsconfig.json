@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
     "lib": [
-      "es2021"
+      "esnext"
     ],
     "module": "commonjs",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
-    "target": "es2021",
+    "target": "esnext",
     "sourceMap": true,
     "moduleResolution": "node",
     "strictNullChecks": true,
