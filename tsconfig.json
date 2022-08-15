@@ -1,8 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "esnext"
-    ],
+    "lib": ["esnext"],
     "module": "commonjs",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -14,16 +12,9 @@
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "*": [
-        "node_modules/*",
-        "src/types/*"
-      ]
+      "*": ["node_modules/*", "src/types/*"]
     }
   },
-  "exclude": [
-    "node_modules"
-  ],
-  "include": [
-    "src/**/*"
-  ]
+  "exclude": ["node_modules"],
+  "include": ["src/**/*", "__tests__/**/*"]
 }
