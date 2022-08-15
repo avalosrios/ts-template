@@ -11,7 +11,11 @@ class PassportConfig {
 
   private configBasicStrategy = () => {
     return new BasicStrategy(
-      (key: string, secret: string, cb: (error: any, user?: any) => void) => {
+      (
+        key: string,
+        secret: string,
+        cb: (error: Error | undefined, user?: any) => void
+      ) => {
         if (key === process.env.API_KEY && secret === process.env.API_SECRET) {
           return cb(undefined, { key });
         }
@@ -26,4 +30,5 @@ class PassportConfig {
   }
 }
 
-export const passportConfig = new PassportConfig().passport;
+export const passportConfig: passport.PassportStatic = new PassportConfig()
+  .passport;
