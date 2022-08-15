@@ -10,7 +10,7 @@ describe('v1', () => {
 
   describe('when authenticated', () => {
     it('works', (done) => {
-      return request(application.app)
+      request(application.app)
         .get('/v1')
         .auth(process.env.API_KEY ?? '', process.env.API_SECRET ?? '')
         .expect(200)
@@ -20,6 +20,9 @@ describe('v1', () => {
         })
         .then(() => {
           done();
+        })
+        .catch((error) => {
+          expect(error).toBeFalsy();
         });
     });
   });
