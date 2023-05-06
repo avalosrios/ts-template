@@ -14,7 +14,7 @@ Happy linting! 💖
 module.exports = {
   env: {
     browser: false,
-    es6: true,
+    es2021: true,
     node: true,
   },
   extends: [
