@@ -11,9 +11,10 @@ export const basicAuth = (req: Request, res: Response, next: NextFunction) => {
         return res.status(401).send({
           error: err?.message ?? 'Unauthorized',
           message: 'Unauthorized',
+          info,
         });
       }
       next();
-    }
+    },
   )(req, res, next);
 };

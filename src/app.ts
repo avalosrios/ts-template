@@ -28,7 +28,7 @@ class App {
       console.info(
         '  App is running at http://localhost:%d in %s mode',
         this.app.get('port'),
-        this.app.get('env')
+        this.app.get('env'),
       );
       // eslint-disable-next-line no-console
       console.info('  Press CTRL-C to stop\n');
