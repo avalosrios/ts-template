@@ -6,7 +6,7 @@ interface EnforceHttpsOptions {
 }
 
 export const enforceHttps = (
-  options?: EnforceHttpsOptions
+  options?: EnforceHttpsOptions,
 ): ((req: Request, res: Response, next: NextFunction) => void) => {
   return (req: Request, res: Response, next: NextFunction) => {
     let isHttps = req.secure;

@@ -14,13 +14,13 @@ class PassportConfig {
       (
         key: string,
         secret: string,
-        cb: (error: Error | undefined, user?: any) => void
+        cb: (error: Error | undefined, user?: any) => void,
       ) => {
         if (key === process.env.API_KEY && secret === process.env.API_SECRET) {
           return cb(undefined, { key });
         }
         return cb(undefined, undefined);
-      }
+      },
     );
   };
 
